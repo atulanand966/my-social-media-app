@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.socialmedia.mysocialmediaapp.entities.User;
+import com.socialmedia.mysocialmediaapp.exceptions.UserNotFoundException;
 import com.socialmedia.mysocialmediaapp.service.UserService;
 
 @RestController
@@ -26,6 +27,12 @@ public class UserRestController {
 	
 	@GetMapping("/users/{id}")
 	public User findOne(@PathVariable int id) {
-		return userService.findOne(id);
+		User user = userService.findOne(id);
+		
+		if(user == null) {
+			throw new UserNotFoundException("No such user, where id = "+id);
+		}
+		
+		return user;
 	}
 }
