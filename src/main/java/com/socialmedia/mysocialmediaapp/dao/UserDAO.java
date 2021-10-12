@@ -12,4 +12,6 @@ public interface UserDAO {
 	List<User> findAll();
 
 	User findOne(int id);
+
+	User save(User user);
 }

@@ -46,4 +46,13 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
+
+
+	@Override
+	public User save(User user) {
+		user.setId(++id);
+		users.add(user);
+		return user;
+	}
+
 }
