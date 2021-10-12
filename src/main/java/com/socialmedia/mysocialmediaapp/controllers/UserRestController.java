@@ -7,18 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.socialmedia.mysocialmediaapp.dao.UserDAO;
+
 import com.socialmedia.mysocialmediaapp.entities.User;
+import com.socialmedia.mysocialmediaapp.service.UserService;
 
 @RestController
 @RequestMapping("/api")
 public class UserRestController {
 
 	@Autowired
-	private UserDAO userDAO;
+	private UserService userService;
 	
 	@GetMapping("/users")
 	public List<User> findAll(){
-		return userDAO.findAll();
+		return userService.findAll();
 	}
 }
