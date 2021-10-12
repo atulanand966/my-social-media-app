@@ -10,7 +10,9 @@ public class HelloWorldController {
 
 	@GetMapping("/plain")
 	public String getStringMessage() {
-		return "Hello World. We arer learning RESTful web services with Spring Boot and\n"
+		return "Hello World. We are learning RESTful web services with Spring Boot and\n"
 				+ "using Git as the version control tool";
 	}
+	
+	
 }
