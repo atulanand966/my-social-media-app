@@ -20,4 +20,10 @@ public class UserServiceImpl implements UserService{
 		return userDAO.findAll();
 	}
 
+	@Override
+	public User findOne(int id) {
+		
+		return userDAO.findOne(id);
+	}
+
 }

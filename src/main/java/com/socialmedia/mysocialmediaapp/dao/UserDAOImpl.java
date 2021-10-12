@@ -32,4 +32,18 @@ public class UserDAOImpl implements UserDAO {
 		return users;
 	}
 
+
+
+	@Override
+	public User findOne(int id) {
+		
+		for(User user :users) {
+			if(user.getId() == id) {
+				return user;
+			}
+		}
+		
+		return null;
+	}
+
 }
