@@ -55,4 +55,17 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 	}
 
+
+
+	@Override
+	public User update(User user) {
+		User updatedUser = findOne(user.getId());
+		updatedUser.setEmail(user.getEmail());
+		updatedUser.setName(user.getName());
+		updatedUser.setPhone(user.getPhone());
+		updatedUser.setUsername(user.getUsername());
+		updatedUser.setWebsite(user.getWebsite());
+		return updatedUser;
+	}
+
 }

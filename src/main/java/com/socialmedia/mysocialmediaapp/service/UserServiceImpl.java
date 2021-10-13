@@ -32,4 +32,10 @@ public class UserServiceImpl implements UserService{
 		return userDAO.save(user);
 	}
 
+	@Override
+	public User update(User user) {
+		
+		return userDAO.update(user);
+	}
+
 }

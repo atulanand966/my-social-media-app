@@ -14,4 +14,6 @@ public interface UserService {
 	User findOne(int id);
 
 	User save(User user);
+
+	User update(User user);
 }
