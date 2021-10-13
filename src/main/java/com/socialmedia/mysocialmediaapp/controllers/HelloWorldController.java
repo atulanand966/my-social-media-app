@@ -2,6 +2,9 @@ package com.socialmedia.mysocialmediaapp.controllers;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,10 +15,13 @@ import com.socialmedia.mysocialmediaapp.entities.HelloWorldBean;
 @RequestMapping("/hello")
 public class HelloWorldController {
 
+	@Autowired
+	private MessageSource messageSource;
+	
 	@GetMapping("/plain")
 	public String getStringMessage() {
-		return "Hello World. We are learning RESTful web services with Spring Boot and\n"
-				+ "using Git as the version control tool";
+		return messageSource.getMessage("hello.world.message",
+				null, "Oops!!! Hello World", LocaleContextHolder.getLocale());
 	}
 	
 	@GetMapping("/bean")
