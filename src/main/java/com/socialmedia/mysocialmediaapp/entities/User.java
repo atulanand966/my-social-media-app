@@ -1,13 +1,25 @@
 package com.socialmedia.mysocialmediaapp.entities;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class User {
 
 	private int id;
 	private String name;
+	
+	@Size(min = 5, message = "The username must have atleast 5 characters")
+	@Size(max = 10, message = "The username cannot have more than 10 characters.")
 	private String username;
+	
+	@Email
 	private String email;
+	
+	@Pattern(regexp = "\\+[0-9]{2,3}[0-9]{10}", message = "Invalid phone number. Please check again.")
 	private String phone;
+	
+	@Pattern(regexp = "www\\.[a-z]+\\.[a-z]+", message = "Not a valid website")
 	private String website;
 
 	public User() {

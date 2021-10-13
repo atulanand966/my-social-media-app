@@ -2,9 +2,12 @@ package com.socialmedia.mysocialmediaapp.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,14 +47,15 @@ public class UserRestController {
 	}
 	
 	@PostMapping("/users")
-	public ResponseEntity<User> save(@RequestBody User user) {
+	public ResponseEntity<User> save(@Valid@RequestBody User user) {
+
 		user.setId(0);
 		User savedUser = userService.save(user);
 		return new ResponseEntity<User>(savedUser, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/users")
-	public User update(@RequestBody User user) {
+	public User update(@Valid@RequestBody User user) {
 		
 		User dbUser = userService.findOne(user.getId());
 		if(dbUser == null) {
