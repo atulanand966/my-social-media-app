@@ -68,4 +68,11 @@ public class UserDAOImpl implements UserDAO {
 		return updatedUser;
 	}
 
+
+
+	@Override
+	public void delete(int id) {
+		users.remove(findOne(id));
+	}
+
 }
