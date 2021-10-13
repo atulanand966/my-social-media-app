@@ -26,6 +26,6 @@ public class HelloWorldController {
 	
 	@GetMapping("/bean")
 	public HelloWorldBean getBeanMessage() {
-		return new HelloWorldBean(7, getStringMessage().replace("\n", " "), new Date());
+		return new HelloWorldBean(7, getStringMessage(), new Date());
 	}
 }
