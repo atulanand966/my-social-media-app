@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
@@ -35,6 +36,12 @@ public class User {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Address address;
 
+	@ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH,
+			CascadeType.MERGE,
+			CascadeType.PERSIST,
+			CascadeType.REFRESH})
+	private Company company;
+	
 	public User() {
 	}
 
@@ -103,6 +110,15 @@ public class User {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	@Override
