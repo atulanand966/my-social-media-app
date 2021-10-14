@@ -1,16 +1,23 @@
 package com.socialmedia.mysocialmediaapp.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@Entity
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	
 	@Size(min = 5, message = "The username must have atleast 5 characters")
-	@Size(max = 10, message = "The username cannot have more than 10 characters.")
+	@Size(max = 20, message = "The username cannot have more than 20 characters.")
 	private String username;
 	
 	@Email
