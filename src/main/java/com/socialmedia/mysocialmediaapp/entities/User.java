@@ -1,9 +1,12 @@
 package com.socialmedia.mysocialmediaapp.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -28,6 +31,9 @@ public class User {
 	
 	@Pattern(regexp = "www\\.[a-z]+\\.[a-z]+", message = "Not a valid website")
 	private String website;
+	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Address address;
 
 	public User() {
 	}
@@ -87,6 +93,16 @@ public class User {
 
 	public void setWebsite(String website) {
 		this.website = website;
+	}
+	
+	
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	@Override
