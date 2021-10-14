@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.socialmedia.mysocialmediaapp.dao.AddressDAO;
 import com.socialmedia.mysocialmediaapp.dao.UserJpaDAO;
+import com.socialmedia.mysocialmediaapp.entities.Address;
 import com.socialmedia.mysocialmediaapp.entities.User;
 import com.socialmedia.mysocialmediaapp.exceptions.UserNotFoundException;
 
@@ -24,9 +26,43 @@ public class UserJPARestController {
 	@Autowired
 	private UserJpaDAO userJpaDAO;
 	
+	@Autowired
+	private AddressDAO addressDAO;
+	
 	@GetMapping("/users")
 	public List<User> findAll(){
 		return userJpaDAO.findAll();
+	}
+	
+	@GetMapping("/users/{id}/address")
+	public Address findAddress(@PathVariable int id) {
+		User user = findOne(id);
+		return user.getAddress();
+	}
+	
+	@PostMapping("/users/{id}/address")
+	public User addAddress(@PathVariable int id, @RequestBody Address address) {
+		User user = findOne(id);
+		address.setId(0);
+		user.setAddress(address);
+		userJpaDAO.saveAndFlush(user);
+		return user;
+	}
+	
+	@DeleteMapping("/address/{id}")
+	public String deleteAddressById(@PathVariable int id) {
+		addressDAO.deleteById(id);
+		return "Address deleted.";
+		
+	}
+	
+	@PutMapping("/users/{id}/address")
+	public User updateAddress(@PathVariable int id, @RequestBody Address address) {
+		User user = findOne(id);
+		int addressId = user.getAddress().getId();
+		address.setId(addressId);
+		addressDAO.saveAndFlush(address);
+		return user;
 	}
 	
 	@GetMapping("/users/{id}")

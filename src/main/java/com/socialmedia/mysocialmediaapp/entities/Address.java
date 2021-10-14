@@ -1,14 +1,20 @@
 package com.socialmedia.mysocialmediaapp.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Pattern;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Address {
 
+	@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -18,12 +24,19 @@ public class Address {
 	
 	@Pattern(regexp = "^[0-9]{6}$", message = "Invalid Postal Code")
 	private String zipcode;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "address", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private User user;
 
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private GeographicalCoordinates geo;
+	
 	public Address() {
 	}
 
-	public Address(int id, String street, String suite, String city, String zipcode) {
-		this.id = id;
+	public Address(String street, String suite, String city, String zipcode) {
+		
 		this.street = street;
 		this.suite = suite;
 		this.city = city;
@@ -68,6 +81,26 @@ public class Address {
 
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
+	}
+
+	
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
+	
+	public GeographicalCoordinates getGeo() {
+		return geo;
+	}
+
+	public void setGeo(GeographicalCoordinates geo) {
+		this.geo = geo;
 	}
 
 	@Override
